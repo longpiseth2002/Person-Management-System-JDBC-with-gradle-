@@ -19,7 +19,7 @@ public class TableUtils {
         while (clazz != null) {
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
-                field.setAccessible(true); // make private fields accessible
+                field.setAccessible(true);
                 if (field.getName().equals("id")) {
                     allColumnsNames.add(0, field.getName());
                 } else if (field.getName().contains("name")) {
@@ -35,7 +35,6 @@ public class TableUtils {
         return allColumnsNames;
     }
 
-    // table.addCell(dataAsString);
     private static void populateTable(Object dataAsObject, List<String> allColumns, Table table) {
         Map<String, Object> dataMap = new LinkedHashMap<>();
         if (dataAsObject == null || allColumns == null || table == null) {
@@ -93,19 +92,19 @@ public class TableUtils {
     }
 
     public static void renderObjectToTable(List<? extends Person> data) {
+        CellStyle center = new CellStyle(CellStyle.HorizontalAlign.CENTER);
         if (data == null || data.isEmpty()) {
             System.out.println("There is no record to render the table");
             return;
         }
         String type = data.get(0).getClass().getSimpleName();
         List<String> allColumns = getClassFields(data.get(0));
-//            CellStyle numberStyle = new CellStyle(CellStyle.HorizontalAlign.right);
         Table table = new Table(allColumns.size(), BorderStyle.UNICODE_BOX_HEAVY_BORDER,
                 ShownBorders.SURROUND_HEADER_FOOTER_AND_COLUMNS);
         for (String col : allColumns) {
             table.addCell(col);
         }
-        //  System.out.println("Here all the columns " + allColumns);
+
         for (Object dataAsObject : data) {
             populateTable(castObject(dataAsObject, type), allColumns, table);
         }
@@ -114,5 +113,10 @@ public class TableUtils {
         table.addCell(data.size() + "", (int) Math.ceil(allColumns.size() / (float) 2));
         System.out.println(table.render());
 
+    }
+
+
+    public static void dd (){
+        System.out.printf("");
     }
 }

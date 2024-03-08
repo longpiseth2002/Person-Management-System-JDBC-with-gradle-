@@ -5,14 +5,13 @@ import lombok.experimental.Accessors;
 
 import java.util.Scanner;
 
-//@Getter
-//@Setter
-//@ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 //@Builder
 @Accessors(chain = true)
+
+
 public class Person {
     private int id;
     private String fullName;
@@ -22,13 +21,13 @@ public class Person {
 
 
     public Person addPerson(Scanner input){
-        System.out.println("Enter fullname: ");
+        System.out.print("Enter fullname: ");
         fullName = input.nextLine();
-        System.out.println("Enter gender : ");
+        System.out.print("Enter gender : ");
         gender = input.nextLine();
-        System.out.println("Enter Address : ");
+        System.out.print("Enter Address : ");
         address = input.nextLine();
-        System.out.println("Enter email address : ");
+        System.out.print("Enter email address : ");
         email = input.nextLine();
 
         return this;

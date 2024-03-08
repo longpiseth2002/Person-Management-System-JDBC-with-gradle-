@@ -20,6 +20,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.nocrala.tools.texttablefmt:text-table-formatter:1.2.4'
 
+
 }
 
 test {

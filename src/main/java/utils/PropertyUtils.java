@@ -21,10 +21,5 @@ public class    PropertyUtils {
         }
     }
 
-//    public static void main(String[] args) {
-//        Properties properties = loadProperty();
-//        System.out.println(properties.getProperty("USERNAME"));
-//        System.out.println(properties.getProperty("PASSWORD"));
-//    }
 
 }

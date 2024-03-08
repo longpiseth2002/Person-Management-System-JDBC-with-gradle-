@@ -3,6 +3,7 @@ package service;
 import model.Person;
 import repository.PersonRepository;
 
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,7 +25,6 @@ public class PersonService {
                 .stream()
                 .sorted(
                         Comparator.comparingInt(Person::getId).reversed()
-                        //  (a,b)-> b.getId() - a.getId()
                 )
                 .toList();
     }
@@ -34,7 +34,6 @@ public class PersonService {
                 .stream()
                 .sorted(
                         Comparator.comparing(Person::getFullName).reversed()
-                        //  (a,b)-> b.getId() - a.getId()
                 )
                 .toList();
     }
@@ -46,7 +45,7 @@ public class PersonService {
 
 
     public int deletePersonByID(Scanner input){
-        System.out.println("Enter the Person ID : ");
+        System.out.print("Enter the Person ID : ");
         int id  = input.nextInt();
         try{
             personRepository.getAllPerson()
@@ -63,16 +62,15 @@ public class PersonService {
     }
 
     public int updatePerson(Scanner input) {
-        System.out.println("Enter the Person ID : ");
+        System.out.print("Enter the Person ID : ");
         int id = input.nextInt();
         try {
             // validation , condition
             var originalPerson = personRepository.getAllPerson()
                     .stream().filter(person -> person.getId() == id)
-                    .findFirst().orElseThrow(); // throw  no such element if the person doesn't exist
+                    .findFirst().orElseThrow();
 
-            // ask the user to input the new updated value for the person
-            // clear buffer
+
             input.nextLine();
             originalPerson.addPerson(input);
             return personRepository.updatePerson(originalPerson);
@@ -80,5 +78,13 @@ public class PersonService {
             System.out.println("There is no element with id = "+id);
             return 0;
         }
+
+    }
+    public List<Person> getPersonsByGender(String genderToSearch) throws SQLException {
+        return personRepository.getPersonsByGender(genderToSearch);
+    }
+
+    public List<Person> getPersonsByName(String nameToSearch) throws SQLException {
+        return personRepository.getPersonsByName(nameToSearch);
     }
 }
