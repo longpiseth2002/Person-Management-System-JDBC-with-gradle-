@@ -1,8 +1,9 @@
+import com.github.javafaker.Faker;
 import model.Person;
-import resonsitory.PersonRepository;
+import repository.PersonRepository;
 import service.PersonService;
-import util.TableUtils;
-
+import utils.TableUtils;
+import view.MainView;
 
 import java.util.*;
 import java.util.concurrent.ThreadFactory;
@@ -39,15 +40,38 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int option;
-
-        List<String> mainMenu = new ArrayList<>(List.of("Add New Person ", "Show Person Information", "Search", "Exit"));
         do {
-            TableUtils.renderMenu(mainMenu, "Person Management System");
-            System.out.print("Enter your option : ");
-            option = input.nextInt();
-
+            option = MainView.renderMain(input);
             switch (option) {
+                case 1: {
+                    input.nextLine(); // clear buffer
+                    System.out.println(
+                            personService.createPerson(input) > 0 ?
+                                    "Successfully Created a New Person"
+                                    : ""
+                    );
+
+                }
+                break;
                 case 2: {
+                    System.out.println(
+                            personService
+                                    .updatePerson(input) > 0 ?
+                                    "Successfully Update Person Info"
+                                    : ""
+                    );
+                }
+                break;
+                case 3: {
+                    System.out.println(
+                            personService
+                                    .deletePersonByID(input) > 0 ?
+                                    "Successfully Remove the Person"
+                                    : "");
+                    ;
+                }
+                break;
+                case 4: {
                     int showOption;
                     List<String> showMenu = new ArrayList<>(List.of(
                             "Show Original Order",
@@ -59,8 +83,10 @@ public class Main {
                         System.out.print("Choose your option: ");
                         showOption = input.nextInt();
 
+
                         switch (showOption) {
                             case 1:
+
                                 TableUtils.renderObjectToTable(personService.getAllPerson());
                                 break;
                             case 2:
@@ -82,7 +108,7 @@ public class Main {
                     } while (showOption != showMenu.size());
                 }
                 break;
-                case 3: {
+                case 5: {
                     int searchOption;
                     List<String> searchMenu = new ArrayList<>(Arrays.asList(
                             "Search By ID",
@@ -99,18 +125,18 @@ public class Main {
                                 System.out.println("Enter Person ID to search:");
                                 searchID = input.nextInt();
                                 int finalSearchID = searchID;
-                                try{
+                                try {
                                     Person optionalPerson =
                                             personService.getAllPerson()
                                                     .stream()
                                                     .filter(person -> person.getId() == finalSearchID)
                                                     .findFirst()
-                                                    .orElseThrow(()-> new ArithmeticException("Whatever exception!! "));
+                                                    .orElseThrow(() -> new ArithmeticException("Whatever exception!! "));
                                     TableUtils.renderObjectToTable(
-                                            Collections.singletonList(optionalPerson)    );
-                                }catch (Exception ex){
+                                            Collections.singletonList(optionalPerson));
+                                } catch (Exception ex) {
                                     ex.printStackTrace();
-                                    System.out.println("There is no element with ID="+searchID);
+                                    System.out.println("There is no element with ID=" + searchID);
                                 }
 
                                 break;
@@ -124,14 +150,14 @@ public class Main {
 
                 }
                 break;
-                case 4:
+                case 6:
                     System.out.println("Exit from the program!!! ");
                     break;
                 default:
                     System.out.println("Invalid Option!!!!!! ");
                     break;
             }
-        } while (option != 4);
+        } while (option != 6);
 
 
     }

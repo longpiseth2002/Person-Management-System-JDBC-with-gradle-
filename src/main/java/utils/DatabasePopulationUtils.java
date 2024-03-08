@@ -1,4 +1,4 @@
-package resonsitory;
+package utils;
 
 import com.github.javafaker.Faker;
 import model.Person;
@@ -7,7 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PersonRepository {
+
+/**
+ * Used to generate the data in the table that has specified in the application.properties file
+ *
+ *
+ * @author keo
+ */
+
+public class DatabasePopulationUtils {
     private static final long SEEDVALUE = 123456L;
     private static final Faker faker = new Faker(new Random(SEEDVALUE));
     private static List<Person> cachedPersons = null;
@@ -29,6 +37,5 @@ public class PersonRepository {
         return persons;
 
     }
-
 
 }

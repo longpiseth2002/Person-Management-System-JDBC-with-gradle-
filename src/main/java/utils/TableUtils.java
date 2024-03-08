@@ -1,4 +1,4 @@
-package util;
+package utils;
 
 import model.Person;
 import org.nocrala.tools.texttablefmt.BorderStyle;
@@ -79,7 +79,7 @@ public class TableUtils {
     }
 
     public static void renderMenu(List<String> items, String menu) {
-        Table table = new Table(2, BorderStyle.UNICODE_BOX_DOUBLE_BORDER_WIDE,
+        Table table = new Table(2, BorderStyle.UNICODE_BOX_HEAVY_BORDER,
                 ShownBorders.SURROUND_HEADER_AND_COLUMNS);
         CellStyle centerStyle = new CellStyle(CellStyle.HorizontalAlign.CENTER);
         int counter = 0;

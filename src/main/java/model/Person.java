@@ -1,11 +1,9 @@
 package model;
 
-
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
+
+import java.util.Scanner;
 
 //@Getter
 //@Setter
@@ -22,5 +20,18 @@ public class Person {
     private String email;
     private String address;
 
-}
 
+    public Person addPerson(Scanner input){
+        System.out.println("Enter fullname: ");
+        fullName = input.nextLine();
+        System.out.println("Enter gender : ");
+        gender = input.nextLine();
+        System.out.println("Enter Address : ");
+        address = input.nextLine();
+        System.out.println("Enter email address : ");
+        email = input.nextLine();
+
+        return this;
+    }
+
+}
