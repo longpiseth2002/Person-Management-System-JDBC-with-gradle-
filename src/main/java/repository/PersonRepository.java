@@ -28,6 +28,8 @@ public class PersonRepository {
     }
 
 
+
+
     public boolean authenticateUser(String username, String password) {
         try (Connection connection = startDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQLUtils.PersonSQL.user)) {
@@ -41,6 +43,8 @@ public class PersonRepository {
         }
         return false;
     }
+
+
 
 
     public List<Person> getAllPerson() {
