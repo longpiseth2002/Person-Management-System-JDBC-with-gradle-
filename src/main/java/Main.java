@@ -1,5 +1,4 @@
 
-import com.github.javafaker.Faker;
 import model.Person;
 import repository.PersonRepository;
 import service.PersonService;
@@ -19,7 +18,6 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Scanner input = new Scanner(System.in);
 
-        // Perform user authentication
         if (authenticateUser(input)) {
             int option;
             do {
@@ -72,13 +70,12 @@ public class Main {
                                     TableUtils.renderObjectToTable(personService.getAllPerson());
                                     break;
                                 case 2:
-                                    // descending id
+
                                     TableUtils.renderObjectToTable(
                                             personService.getAllPersonDescendingByID()
                                     );
                                     break;
                                 case 3:
-                                    // descending name
                                     TableUtils.renderObjectToTable(
                                             personService.getAllPersonDescendingByName()
                                     );
@@ -95,7 +92,7 @@ public class Main {
                         List<String> searchMenu = new ArrayList<>(Arrays.asList(
                                 "Search By ID",
                                 "Search By Gender",
-                                "Search By Country",
+                                "Search By Name",
                                 "Exit"));
                         do {
                             TableUtils.renderMenu(searchMenu, "Search for Person");
@@ -135,14 +132,14 @@ public class Main {
                                     break;
 
                                 case 3:
-                                    input.nextLine(); // Consume newline character
-                                    System.out.print("Enter country to search: ");
+                                    input.nextLine();
+                                    System.out.print("Enter name to search: ");
                                     String countryToSearch = input.nextLine();
                                     List<Person> personsByCountry = personService.getPersonsByName(countryToSearch);
                                     if (!personsByCountry.isEmpty()) {
                                         TableUtils.renderObjectToTable(personsByCountry);
                                     } else {
-                                        System.out.println("No persons found from the specified country.");
+                                        System.out.println("No persons found from the specified name.");
                                     }
                                     break;
 

@@ -1,5 +1,6 @@
 package utils;
 
+import com.github.javafaker.Faker;
 import model.Person;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.CellStyle;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TableUtils {
+    Faker faker = new Faker();
     private static List<String> getClassFields(Object object) {
         List<String> allColumnsNames = new ArrayList<>();
         Class<?> clazz = object.getClass();
